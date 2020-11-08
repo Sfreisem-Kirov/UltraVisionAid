@@ -4,6 +4,7 @@
 // 11/5/20
 
 #include "main2.h"
+#include "tone.h"
 
 void setup() {
     // RCC->AHB1ENR |= (1 << RCC_AHB1ENR_GPIOAEN_Pos);
@@ -74,7 +75,10 @@ void setup() {
 }
 
 int main(void) {
-    setup();    
+    setup();
+    tone(500,15000);
+    // tone(300,5000);
+    // tone(400,5000);
     while(1){
         delay_millis(TIM2, 200);
         //__WFI();

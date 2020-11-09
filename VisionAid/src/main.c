@@ -30,6 +30,8 @@ void setup() {
 
     configureFlash();
     configureClock();
+
+    initUSART(USART_ID);
     
     // Enable LED as output
     RCC->AHB1ENR.GPIOAEN = 1;
@@ -43,6 +45,8 @@ void setup() {
     RCC->APB1ENR |= (1 << 0); // TIM2EN
     initTIM(DELAY_TIM);
 
+    // Initialize ultrasonic distance sensor
+    initSensor(INPIN,OUTPIN); //8,9
     
   
     // 1. Enable SYSCFG clock domain in RCC
@@ -67,7 +71,6 @@ void setup() {
     *NVIC_ISER1 |= (1 << 8);
 
 
-
     // Enable interrupts for TIMx
     // DELAY_TIM->DIER |= TIM_DIER_UIE;
     // NVIC_EnableIRQ(TIM2_IRQn); // IRQn 28
@@ -80,7 +83,16 @@ int main(void) {
     // tone(300,5000);
     // tone(400,5000);
     while(1){
-        delay_millis(TIM2, 200);
+        delay_millis(DELAY_TIM, 200);
+
+        while(!digitalRead(GPIOC, BUTTON_PIN)){
+            int dist = getDistance(INPIN, OUTPIN);
+            printDist(dist);
+        }
+        // while button is being pressed
+            // check distance
+            // emit tone on that distance for a quarter of a second
+
         //__WFI();
     }
 }
@@ -100,6 +112,22 @@ void EXTI15_10_IRQHandler(void){
 
         // Then toggle the LED
         togglePin(GPIOA, LED_PIN);
-
+        
+        int val = getDistance(INPIN, OUTPIN);
+        //int val = 81;
+        printDist(val);
     }
+}
+
+void printDist(int val) {
+    uint8_t msg[64];
+
+    sprintf(msg, " %d \n\r",val);
+
+    uint8_t i = 0;
+    do
+    {
+        sendChar(USART_ID, msg[i]);
+        i += 1;
+    } while (msg[i]);
 }

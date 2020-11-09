@@ -13,6 +13,7 @@
 #include "STM32F401RE_RCC.h"
 #include "STM32F401RE_SPI.h"
 #include "STM32F401RE_TIM.h"
+#include "STM32F401RE_USART.h"
 
 
 #endif

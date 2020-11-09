@@ -6,7 +6,12 @@
 #ifndef MAIN2_H
 #define MAIN2_H
 
+//#include "stm32f4xx.h"
 #include "STM32F401RE.h"
+#include "HCSR04LIB.h"
+#include <string.h>
+#include <stdint.h>
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Custom defines
@@ -15,6 +20,9 @@
 #define LED_PIN 5
 #define BUTTON_PIN 13 // PC13
 #define DELAY_TIM TIM2
+#define USART_ID USART2_ID
+#define INPIN 8
+#define OUTPIN 9
 
 #define NVIC_ISER0 ((uint32_t *) 0xE000E100UL)
 #define NVIC_ISER1 ((uint32_t *) 0xE000E104UL)

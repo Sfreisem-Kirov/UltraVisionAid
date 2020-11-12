@@ -25,11 +25,18 @@ void tone(int freq, int delay) {
 
     int duty = 50;
     int arr = 255;
-    int psc = (int)((84000000/((arr+1)*freq)));
+    int psc;
+    if (freq > 0) {
+        psc = (int)((84000000/((arr+1)*freq)));
+    } else {
+        duty = 0;
+        psc = 1;
+    }
+    
 
     configureTIM5(psc,arr,duty);
     delay_millis(TIM2, delay);
-    configureTIM5(psc,arr,0);
+    // configureTIM5(psc,arr,0);
 }
 
 void configureTIM5(int psc, int arr, int duty) {

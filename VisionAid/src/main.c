@@ -79,7 +79,7 @@ void setup() {
 
 int main(void) {
     setup();
-    tone(500,15000);
+    tone(500,1000);
     // tone(300,5000);
     // tone(400,5000);
     while(1){
@@ -87,8 +87,12 @@ int main(void) {
 
         while(!digitalRead(GPIOC, BUTTON_PIN)){
             int dist = getDistance(INPIN, OUTPIN);
-            printDist(dist);
+            int freq = (880.0-(((660.0/18000.0)*dist)));
+            // printDist(freq);
+            tone(freq,60);
         }
+
+        tone(0,60);
         // while button is being pressed
             // check distance
             // emit tone on that distance for a quarter of a second
@@ -115,7 +119,11 @@ void EXTI15_10_IRQHandler(void){
         
         int val = getDistance(INPIN, OUTPIN);
         //int val = 81;
-        printDist(val);
+        // printDist(val);
+        int dist = getDistance(INPIN, OUTPIN);
+        int freq = (880.0-(((660.0/18000.0)*dist)));
+        // printDist(freq);
+        tone(freq,60);
     }
 }
 

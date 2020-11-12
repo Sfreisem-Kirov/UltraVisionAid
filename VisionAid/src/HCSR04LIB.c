@@ -1,4 +1,4 @@
-// HCSR04LIB.h
+// HCSR04LIB.c
 // Sam Freisem-Kirov  Anuragini Arora
 // sfreisemkirov@hmc.edu
 // 11/7/20

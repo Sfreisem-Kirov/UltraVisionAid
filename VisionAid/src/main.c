@@ -84,19 +84,10 @@ int main(void) {
     // tone(400,5000);
     while(1){
         delay_millis(DELAY_TIM, 200);
-        int count = 0;
-        int prevDists[] = {0,0,0,0,0,0,0,0,0,0};
-        int sum = 0;
-        int i = 0;
+
         while(!digitalRead(GPIOC, BUTTON_PIN)){
             int dist = getDistance(INPIN, OUTPIN);
-            sum -= prevDists[i];
-            prevDists[i] = dist;
-            i = (i+1) % 10;
-            sum+= dist;
-            int avgDist = sum/count;
-            if (count < 10) count++;
-            int freq = (880.0-(((660.0/18000.0)*avgDist)));
+            int freq = (880.0-(((660.0/18000.0)*dist)));
             printDist(freq);
             tone(freq,60);
         }
@@ -107,7 +98,7 @@ int main(void) {
             // emit tone on that distance for a quarter of a second
             // when the button is not pressed, stop the tone
 
-        __WFI();
+        //__WFI();
     }
 }
 

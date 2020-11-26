@@ -88,7 +88,7 @@ int main(void) {
         while(!digitalRead(GPIOC, BUTTON_PIN)){
             int dist = getDistance(INPIN, OUTPIN);
             int freq = (880.0-(((660.0/18000.0)*dist)));
-            // printDist(freq);
+            printDist(freq);
             tone(freq,60);
         }
 
@@ -123,7 +123,7 @@ void EXTI15_10_IRQHandler(void){
         // printDist(val);
         int dist = getDistance(INPIN, OUTPIN);
         int freq = (880.0-(((660.0/18000.0)*dist)));
-        // printDist(freq);
+        printDist(freq);
         tone(freq,60);
     }
 }

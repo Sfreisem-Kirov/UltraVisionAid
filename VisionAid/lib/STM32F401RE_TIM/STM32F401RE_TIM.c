@@ -34,7 +34,7 @@ void delay_micros(TIM_TypeDef * TIMx, uint32_t us){
 }
 
 void start_count(TIM_TypeDef * TIMx) {
-  TIMx->ARR = 32000;// Set timer max count
+  TIMx->ARR = 18000;// Set timer max count
   TIMx->EGR |= 1;     // Force update
   TIMx->SR &= ~(0x1); // Clear UIF
   TIMx->CNT = 0;      // Reset count
@@ -42,7 +42,7 @@ void start_count(TIM_TypeDef * TIMx) {
 
 int get_count_micros(TIM_TypeDef * TIMx) {
   if(TIMx->SR & 1) {
-    return 32000;
+    return 18000;
   }
   return TIMx->CNT;
 }

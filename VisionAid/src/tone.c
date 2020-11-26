@@ -13,9 +13,10 @@ void tone(int freq, int delay) {
 
     // configureClock();
 
-    // PA0 connected to speaker
+    // PA0 connected to LM386
     // set mode to alt func
     pinMode(GPIOA,0,2);
+
     // set alt func lower register to AF02 to match TIM5_CH1 output
     // GPIOA->AFRL.AFRL0 = 0b0010;
     GPIOA->AFRL &= ~(0b11 << 2); // 00 in bits 3:2
@@ -23,19 +24,18 @@ void tone(int freq, int delay) {
     GPIOA->AFRL &= ~(0b1 << 0); // 0 in bit 0
 
 
-    int duty = 50;
-    int arr = 255;
-    int psc;
-    if (freq > 0) {
-        psc = (int)((84000000/((arr+1)*freq)));
+    int duty = 50; // sets duty cycle to constant 50%
+    int arr = 255; // ARR configured for 8-bit resolution
+    int psc; // PSC with default value
+    if (freq > 0) { // if frequency given is greater than zero,
+        psc = (int)((84000000/((arr+1)*freq))); // then calculates PSC using ARR
     } else {
-        duty = 0;
-        psc = 1;
+        duty = 0; // otherwise, sets duty cycle to 0% for no tone
+        psc = 1; // sets PSC to 1
     }
     
-
-    configureTIM5(psc,arr,duty);
-    delay_millis(TIM2, delay);
+    configureTIM5(psc,arr,duty); // configures TIM5 to produce tone at pitch given by frequency
+    delay_millis(TIM2, delay); // delays for given duration in milliseconds using TIM2
     // configureTIM5(psc,arr,0);
 }
 

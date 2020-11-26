@@ -96,6 +96,7 @@ int main(void) {
         // while button is being pressed
             // check distance
             // emit tone on that distance for a quarter of a second
+            // when the button is not pressed, stop the tone
 
         //__WFI();
     }

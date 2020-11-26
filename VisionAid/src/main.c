@@ -85,9 +85,20 @@ int main(void) {
     while(1){
         delay_millis(DELAY_TIM, 200);
 
+        int count = 0;
+        int prevDists[10] = {0,0,0,0,0,0,0,0,0,0};
+        int sum = 0;
+        int i = 0;
+
         while(!digitalRead(GPIOC, BUTTON_PIN)){
             int dist = getDistance(INPIN, OUTPIN);
-            int freq = (880.0-(((660.0/18000.0)*dist)));
+            sum -= prevDists[i];
+            prevDists[i] = dist;
+            i = (i+1) % 10;
+            sum+= dist;
+            if (count < 10) count++;
+            int avgDist = sum/count;
+            int freq = (880.0-(((660.0/18000.0)*avgDist)));
             printDist(freq);
             tone(freq,60);
         }

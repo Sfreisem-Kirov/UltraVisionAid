@@ -86,7 +86,7 @@ int main(void) {
         delay_millis(DELAY_TIM, 200);
 
         int count = 0;
-        int prevDists[10] = {0,0,0,0,0};
+        int prevDists[10] = {0,0,0,0,0,0,0};
         int sum = 0;
         int i = 0;
 
@@ -94,9 +94,9 @@ int main(void) {
             int dist = getDistance(INPIN, OUTPIN);
             sum -= prevDists[i];
             prevDists[i] = dist;
-            i = (i+1) % 5;
+            i = (i+1) % 7;
             sum+= dist;
-            if (count < 5) count++;
+            if (count < 7) count++;
             int avgDist = sum/count;
             int freq = (880.0-(((660.0/18000.0)*avgDist)));
             printDist(freq);

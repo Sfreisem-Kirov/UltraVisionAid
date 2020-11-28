@@ -86,7 +86,7 @@ int main(void) {
         delay_millis(DELAY_TIM, 200);
 
         int count = 0;
-        int prevDists[10] = {0,0,0,0,0,0,0};
+        int prevDists[7] = {0,0,0,0,0,0,0};
         int sum = 0;
         int i = 0;
 

@@ -1,18 +1,10 @@
 // Standard library includes.
 #include <stdint.h>
 #include <stdlib.h>
-// Vendor-provided device header file.
-//#include "stm32f4xx.h"
 
 #include "STM32F401RE.h"
-// #include "tone.h"
 
 void tone(int freq, int delay) {
-
-    // configureFlash();
-
-    // configureClock();
-
     // PA0 connected to LM386
     // set mode to alt func
     pinMode(GPIOA,0,2);

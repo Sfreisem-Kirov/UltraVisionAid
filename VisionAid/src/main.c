@@ -109,7 +109,7 @@ int main(void) {
             // emit tone on that distance for a quarter of a second
             // when the button is not pressed, stop the tone
 
-        __WFI();
+        //__WFI();
     }
 }
 
@@ -127,7 +127,7 @@ void EXTI15_10_IRQHandler(void){
         EXTI->PR |= (1 << BUTTON_PIN);
 
         // Then toggle the LED
-        // togglePin(GPIOA, LED_PIN);
+        togglePin(GPIOA, LED_PIN);
         
         int val = getDistance(INPIN, OUTPIN);
         //int val = 81;
